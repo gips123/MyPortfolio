@@ -1,12 +1,20 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { Code, Palette, Zap, Heart, Coffee, Sparkles } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { Code, Palette, Zap, Heart, Coffee, Sparkles, Award, Target, Users, Lightbulb } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 export default function AboutSection() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [0, 360]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -25,67 +33,63 @@ export default function AboutSection() {
     return () => observer.disconnect();
   }, []);
 
-  const skills = [
-    {
-      icon: Code,
-      title: 'Frontend Development',
-      description: 'React, Next.js, TypeScript, Tailwind CSS',
-      color: 'from-blue-500 to-cyan-500',
-      delay: 0.1,
-    },
-    {
-      icon: Zap,
-      title: 'Backend Development',
-      description: 'Node.js, Express, MongoDB, PostgreSQL',
-      color: 'from-green-500 to-emerald-500',
-      delay: 0.2,
-    },
-    {
-      icon: Palette,
-      title: 'UI/UX Design',
-      description: 'Figma, Adobe XD, User Research',
-      color: 'from-purple-500 to-pink-500',
-      delay: 0.3,
-    },
+  const achievements = [
+    { number: '50+', label: 'Projects Completed', icon: Award },
+    { number: '3+', label: 'Years Experience', icon: Target },
+    { number: '20+', label: 'Happy Clients', icon: Users },
+    { number: '100+', label: 'Creative Solutions', icon: Lightbulb },
   ];
 
-  const stats = [
-    { number: '2+', label: 'Years Experience', delay: 0.1 },
-    { number: '15+', label: 'Projects Completed', delay: 0.2 },
-    { number: '5+', label: 'Technologies', delay: 0.3 },
-    { number: '100%', label: 'Client Satisfaction', delay: 0.4 },
+  const expertise = [
+    {
+      title: 'Frontend Mastery',
+      description: 'Building responsive, performant web applications with React, Next.js, and modern CSS frameworks.',
+      skills: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
+      color: 'from-blue-500 to-cyan-500',
+      percentage: 95,
+    },
+    {
+      title: 'Backend Engineering',
+      description: 'Developing scalable server-side applications and APIs with Node.js ecosystem.',
+      skills: ['Node.js', 'Express.js', 'MongoDB', 'PostgreSQL', 'GraphQL'],
+      color: 'from-green-500 to-emerald-500',
+      percentage: 88,
+    },
+    {
+      title: 'Design Systems',
+      description: 'Creating cohesive design languages and user experiences that delight users.',
+      skills: ['Figma', 'Adobe XD', 'UI/UX', 'Design Tokens', 'Prototyping'],
+      color: 'from-purple-500 to-pink-500',
+      percentage: 90,
+    },
   ];
 
   return (
     <section 
       ref={sectionRef}
       id="about" 
-      className="relative py-32 bg-gradient-to-br from-gray-50 via-blue-50/30 to-purple-50/30 dark:from-gray-900 dark:via-blue-900/10 dark:to-purple-900/10 overflow-hidden"
+      className="relative py-32 bg-black overflow-hidden"
     >
-      {/* Background decorations */}
+      {/* Dynamic Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute top-20 right-20 w-64 h-64 bg-gradient-to-r from-blue-400/10 to-purple-600/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear",
-          }}
+          style={{ y: y1, rotate }}
+          className="absolute top-20 right-20 w-80 h-80 bg-gradient-to-r from-blue-500/20 to-purple-600/20 rounded-full blur-3xl"
         />
         <motion.div
-          className="absolute bottom-20 left-20 w-48 h-48 bg-gradient-to-r from-purple-400/10 to-pink-600/10 rounded-full blur-3xl"
+          style={{ y: y2 }}
+          className="absolute bottom-20 left-20 w-60 h-60 bg-gradient-to-r from-cyan-500/15 to-pink-600/15 rounded-full blur-2xl"
+        />
+        <motion.div
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 rounded-full blur-3xl"
           animate={{
-            scale: [1.2, 1, 1.2],
-            rotate: [360, 180, 0],
+            scale: [1, 1.3, 1],
+            opacity: [0.3, 0.6, 0.3],
           }}
           transition={{
-            duration: 25,
+            duration: 8,
             repeat: Infinity,
-            ease: "linear",
+            ease: "easeInOut",
           }}
         />
       </div>
@@ -101,127 +105,389 @@ export default function AboutSection() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-medium mb-4"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-blue-400 font-medium mb-4"
           >
             <Sparkles size={16} />
             About Me
           </motion.div>
           <h2 className="text-4xl md:text-6xl font-black mb-6">
-            <span className="bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 dark:from-white dark:via-blue-200 dark:to-purple-200 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent">
               Crafting Digital Excellence
             </span>
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
             Passionate about creating meaningful digital experiences that combine beautiful design with powerful functionality.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
-          {/* Left column - Story */}
+        {/* Interactive Hero Section */}
+        <div className="relative mb-32">
+          {/* Floating Profile Card */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="space-y-6"
+            initial={{ opacity: 0, y: 100, rotateX: 45 }}
+            animate={isVisible ? { opacity: 1, y: 0, rotateX: 0 } : { opacity: 0, y: 100, rotateX: 45 }}
+            transition={{ duration: 1.2, delay: 0.3 }}
+            className="relative max-w-6xl mx-auto"
           >
-            <div className="space-y-4">
-              <h3 className="text-3xl font-bold text-gray-900 dark:text-white">
-                My Journey
-              </h3>
-              <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-                I'm a passionate full-stack developer with a keen eye for design and a love for clean, efficient code. 
-                My journey began with curiosity about how websites work, and it has evolved into a deep passion for 
-                creating digital experiences that make a real difference.
-              </p>
-              <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-                When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, 
-                or sharing knowledge with the developer community. I believe in continuous learning and staying ahead 
-                of the curve in this ever-evolving field.
-              </p>
-            </div>
-
-            {/* Fun facts */}
-            <div className="flex flex-wrap gap-4 pt-6">
-              <div className="flex items-center gap-2 px-4 py-2 bg-white/50 dark:bg-gray-800/50 rounded-full border border-gray-200 dark:border-gray-700">
-                <Coffee size={16} className="text-amber-600" />
-                <span className="text-sm font-medium">Coffee Lover</span>
-              </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-white/50 dark:bg-gray-800/50 rounded-full border border-gray-200 dark:border-gray-700">
-                <Heart size={16} className="text-red-500" />
-                <span className="text-sm font-medium">Open Source</span>
-              </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-white/50 dark:bg-gray-800/50 rounded-full border border-gray-200 dark:border-gray-700">
-                <Sparkles size={16} className="text-purple-600" />
-                <span className="text-sm font-medium">UI/UX Enthusiast</span>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Right column - Skills */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="space-y-6"
-          >
-            <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
-              What I Do
-            </h3>
-            {skills.map((skill, index) => (
-              <motion.div
-                key={skill.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.6, delay: 0.8 + skill.delay }}
-                className="group"
-              >
-                <div className="relative p-6 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-gray-700/50 hover:bg-white/80 dark:hover:bg-gray-800/80 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10">
-                  <div className="flex items-start gap-4">
-                    <div className={`p-3 rounded-xl bg-gradient-to-r ${skill.color} text-white group-hover:scale-110 transition-transform duration-300`}>
-                      <skill.icon size={24} />
+            <div className="glass-strong rounded-3xl p-8 md:p-12 relative overflow-hidden group">
+              {/* Animated gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+              
+              <div className="grid lg:grid-cols-12 gap-8 items-center relative z-10">
+                {/* Left - Avatar & Quick Info */}
+                <div className="lg:col-span-4 text-center lg:text-left">
+                  {/* Levitating Avatar */}
+                  <motion.div
+                    className="relative w-48 h-48 mx-auto lg:mx-0 mb-8"
+                    animate={{ 
+                      y: [0, -10, 0],
+                      rotate: [0, 2, -2, 0]
+                    }}
+                    transition={{ 
+                      duration: 6, 
+                      repeat: Infinity, 
+                      ease: "easeInOut" 
+                    }}
+                  >
+                    <div className="relative w-full h-full">
+                      {/* Glow ring */}
+                      <motion.div
+                        className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 blur-2xl opacity-50"
+                        animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
+                        transition={{ duration: 3, repeat: Infinity }}
+                      />
+                      
+                      {/* Main avatar */}
+                      <motion.div
+                        className="relative w-full h-full rounded-3xl glass-strong flex items-center justify-center text-white text-4xl font-bold overflow-hidden"
+                        whileHover={{ scale: 1.05, rotateY: 15 }}
+                        style={{ transformStyle: "preserve-3d" }}
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 opacity-90" />
+                        <span className="relative z-10 text-5xl">GA</span>
+                        
+                        {/* Floating particles */}
+                        {[...Array(6)].map((_, i) => (
+                          <motion.div
+                            key={i}
+                            className="absolute w-2 h-2 bg-white rounded-full opacity-60"
+                            animate={{
+                              x: [0, Math.random() * 100 - 50],
+                              y: [0, Math.random() * 100 - 50],
+                              opacity: [0, 1, 0],
+                            }}
+                            transition={{
+                              duration: 3,
+                              repeat: Infinity,
+                              delay: i * 0.5,
+                            }}
+                            style={{
+                              left: `${Math.random() * 100}%`,
+                              top: `${Math.random() * 100}%`,
+                            }}
+                          />
+                        ))}
+                      </motion.div>
                     </div>
-                    <div className="flex-1">
-                      <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                        {skill.title}
-                      </h4>
-                      <p className="text-gray-600 dark:text-gray-300">
-                        {skill.description}
-                      </p>
-                    </div>
+                  </motion.div>
+
+                  {/* Achievement Badges */}
+                  <div className="grid grid-cols-2 gap-3 mb-6">
+                    {achievements.map((achievement, index) => (
+                      <motion.div
+                        key={achievement.label}
+                        initial={{ opacity: 0, scale: 0, rotateY: 90 }}
+                        animate={isVisible ? { opacity: 1, scale: 1, rotateY: 0 } : { opacity: 0, scale: 0, rotateY: 90 }}
+                        transition={{ duration: 0.8, delay: 0.5 + index * 0.15 }}
+                        whileHover={{ scale: 1.1, rotateX: 10 }}
+                        className="glass rounded-xl p-4 hover:glass-strong transition-all duration-300"
+                      >
+                        <achievement.icon className="w-6 h-6 mx-auto mb-2 text-blue-400" />
+                        <motion.div 
+                          className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+                          initial={{ opacity: 0 }}
+                          animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
+                          transition={{ duration: 0.5, delay: 1 + index * 0.1 }}
+                        >
+                          {achievement.number}
+                        </motion.div>
+                        <div className="text-xs text-gray-300 font-medium">{achievement.label}</div>
+                      </motion.div>
+                    ))}
                   </div>
-                  <div className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${skill.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
                 </div>
-              </motion.div>
-            ))}
+
+                {/* Right - Story & Personality */}
+                <div className="lg:col-span-8 space-y-8">
+                  <motion.div
+                    initial={{ opacity: 0, x: 100 }}
+                    animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 100 }}
+                    transition={{ duration: 0.8, delay: 0.7 }}
+                  >
+                    <motion.h3 
+                      className="text-5xl md:text-6xl font-black mb-6 leading-tight"
+                      animate={isVisible ? { 
+                        backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] 
+                      } : {}}
+                      transition={{ duration: 8, repeat: Infinity }}
+                      style={{
+                        background: "linear-gradient(90deg, #60A5FA, #A78BFA, #F472B6, #60A5FA)",
+                        backgroundSize: "300% 100%",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                      }}
+                    >
+                      Digital Craftsman & Innovator
+                    </motion.h3>
+                    
+                    <div className="space-y-4">
+                      <motion.p 
+                        className="text-xl text-gray-300 leading-relaxed"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                        transition={{ duration: 0.6, delay: 0.9 }}
+                      >
+                        I transform complex ideas into elegant digital solutions. With a passion for both 
+                        <span className="text-blue-400 font-semibold"> cutting-edge technology</span> and 
+                        <span className="text-purple-400 font-semibold"> beautiful design</span>, 
+                        I create experiences that users love and businesses trust.
+                      </motion.p>
+                      
+                      <motion.p 
+                        className="text-lg text-gray-400 leading-relaxed"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                        transition={{ duration: 0.6, delay: 1.1 }}
+                      >
+                        Every line of code is crafted with intention, every pixel placed with purpose. 
+                        I don't just build applications—I create digital experiences that leave lasting impressions.
+                      </motion.p>
+                    </div>
+                  </motion.div>
+
+                  {/* Personality Traits */}
+                  <motion.div 
+                    className="grid grid-cols-1 md:grid-cols-3 gap-4"
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+                    transition={{ duration: 0.8, delay: 1.3 }}
+                  >
+                    {[
+                      { icon: Coffee, title: "Coffee Enthusiast", desc: "Powered by caffeine & creativity", color: "text-amber-400" },
+                      { icon: Heart, title: "Open Source Advocate", desc: "Building for the community", color: "text-red-400" },
+                      { icon: Sparkles, title: "Continuous Learner", desc: "Always exploring new frontiers", color: "text-purple-400" }
+                    ].map((trait, index) => (
+                      <motion.div
+                        key={trait.title}
+                        initial={{ opacity: 0, rotateX: 90 }}
+                        animate={isVisible ? { opacity: 1, rotateX: 0 } : { opacity: 0, rotateX: 90 }}
+                        transition={{ duration: 0.6, delay: 1.5 + index * 0.2 }}
+                        whileHover={{ scale: 1.05, rotateY: 10 }}
+                        className="glass rounded-xl p-4 hover:glass-strong transition-all duration-300 group"
+                      >
+                        <trait.icon className={`w-6 h-6 ${trait.color} mb-3 group-hover:scale-110 transition-transform`} />
+                        <div className="text-white font-semibold text-sm mb-1">{trait.title}</div>
+                        <div className="text-gray-400 text-xs">{trait.desc}</div>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                </div>
+              </div>
+            </div>
           </motion.div>
         </div>
 
-        {/* Stats section */}
+        {/* 3D Expertise Showcase */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8, delay: 1.2 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-8"
+          initial={{ opacity: 0, y: 100 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
+          transition={{ duration: 1, delay: 1.8 }}
+          className="relative"
         >
-          {stats.map((stat, index) => (
+          {/* Section Header */}
+          <div className="text-center mb-16">
             <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.6, delay: 1.4 + stat.delay }}
-              className="text-center group"
+              initial={{ opacity: 0, scale: 0 }}
+              animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
+              transition={{ duration: 0.8, delay: 2 }}
+              className="inline-flex items-center gap-2 px-6 py-3 glass rounded-full mb-6"
             >
-              <div className="relative p-6 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-gray-700/50 hover:bg-white/80 dark:hover:bg-gray-800/80 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 group-hover:scale-105">
-                <div className="text-3xl md:text-4xl font-black bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                  {stat.label}
-                </div>
-              </div>
+              <Code className="w-5 h-5 text-blue-400" />
+              <span className="text-blue-400 font-semibold">Expertise & Skills</span>
             </motion.div>
-          ))}
+            
+            <motion.h3 
+              className="text-4xl md:text-5xl font-black mb-6"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.8, delay: 2.2 }}
+            >
+              <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Mastering the Art of Code
+              </span>
+            </motion.h3>
+          </div>
+
+          {/* 3D Skills Grid */}
+          <div className="grid lg:grid-cols-3 gap-8 perspective-1000">
+            {expertise.map((item, index) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, rotateX: 60, z: -200 }}
+                animate={isVisible ? { opacity: 1, rotateX: 0, z: 0 } : { opacity: 0, rotateX: 60, z: -200 }}
+                transition={{ 
+                  duration: 1, 
+                  delay: 2.5 + index * 0.3,
+                  type: "spring",
+                  stiffness: 100
+                }}
+                whileHover={{ 
+                  rotateY: 15, 
+                  rotateX: -10, 
+                  scale: 1.05,
+                  z: 50,
+                  transition: { duration: 0.3 }
+                }}
+                className="group transform-gpu"
+                style={{ transformStyle: "preserve-3d" }}
+              >
+                <div className="glass-strong rounded-3xl p-8 h-full relative overflow-hidden group-hover:glass transition-all duration-500">
+                  {/* Animated background gradient */}
+                  <motion.div
+                    className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
+                    animate={{
+                      background: [
+                        `linear-gradient(45deg, ${item.color.split(' ')[1]}, ${item.color.split(' ')[3]})`,
+                        `linear-gradient(135deg, ${item.color.split(' ')[3]}, ${item.color.split(' ')[1]})`,
+                        `linear-gradient(45deg, ${item.color.split(' ')[1]}, ${item.color.split(' ')[3]})`
+                      ]
+                    }}
+                    transition={{ duration: 4, repeat: Infinity }}
+                  />
+
+                  {/* Floating Icon */}
+                  <motion.div
+                    className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${item.color} flex items-center justify-center mb-6 relative z-10`}
+                    animate={{ 
+                      y: [0, -8, 0],
+                      rotate: [0, 5, -5, 0]
+                    }}
+                    transition={{ 
+                      duration: 4, 
+                      repeat: Infinity, 
+                      ease: "easeInOut",
+                      delay: index * 0.5
+                    }}
+                    whileHover={{ scale: 1.2, rotate: 360 }}
+                  >
+                    <div className="w-8 h-8 bg-white rounded-lg opacity-90" />
+                    
+                    {/* Orbiting particles */}
+                    {[...Array(3)].map((_, i) => (
+                      <motion.div
+                        key={i}
+                        className="absolute w-2 h-2 bg-white rounded-full"
+                        animate={{
+                          rotate: [0, 360],
+                          scale: [0.5, 1, 0.5]
+                        }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          delay: i * 0.5
+                        }}
+                        style={{
+                          transformOrigin: `${30 + i * 10}px center`
+                        }}
+                      />
+                    ))}
+                  </motion.div>
+
+                  <div className="relative z-10">
+                    <h4 className="text-2xl font-bold text-white mb-3 group-hover:text-blue-100 transition-colors">
+                      {item.title}
+                    </h4>
+                    <p className="text-gray-300 leading-relaxed mb-6 group-hover:text-gray-200 transition-colors">
+                      {item.description}
+                    </p>
+
+                    {/* Animated Progress Ring */}
+                    <div className="relative w-20 h-20 mx-auto mb-6">
+                      <svg className="w-20 h-20 transform -rotate-90" viewBox="0 0 80 80">
+                        <circle
+                          cx="40"
+                          cy="40"
+                          r="30"
+                          stroke="rgba(255,255,255,0.1)"
+                          strokeWidth="8"
+                          fill="none"
+                        />
+                        <motion.circle
+                          cx="40"
+                          cy="40"
+                          r="30"
+                          stroke={`url(#gradient-${index})`}
+                          strokeWidth="8"
+                          fill="none"
+                          strokeLinecap="round"
+                          initial={{ pathLength: 0 }}
+                          animate={isVisible ? { pathLength: item.percentage / 100 } : { pathLength: 0 }}
+                          transition={{ duration: 2, delay: 3 + index * 0.2 }}
+                        />
+                        <defs>
+                          <linearGradient id={`gradient-${index}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#60A5FA" />
+                            <stop offset="50%" stopColor="#A78BFA" />
+                            <stop offset="100%" stopColor="#F472B6" />
+                          </linearGradient>
+                        </defs>
+                      </svg>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <motion.span
+                          className="text-lg font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+                          initial={{ opacity: 0, scale: 0 }}
+                          animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
+                          transition={{ duration: 0.5, delay: 3.5 + index * 0.2 }}
+                        >
+                          {item.percentage}%
+                        </motion.span>
+                      </div>
+                    </div>
+
+                    {/* Tech Stack Pills */}
+                    <div className="flex flex-wrap gap-2 justify-center">
+                      {item.skills.map((skill, skillIndex) => (
+                        <motion.span
+                          key={skill}
+                          initial={{ opacity: 0, y: 20, rotateX: 90 }}
+                          animate={isVisible ? { opacity: 1, y: 0, rotateX: 0 } : { opacity: 0, y: 20, rotateX: 90 }}
+                          transition={{ 
+                            duration: 0.5, 
+                            delay: 3.8 + index * 0.2 + skillIndex * 0.1,
+                            type: "spring"
+                          }}
+                          whileHover={{ scale: 1.1, y: -2 }}
+                          className="px-3 py-1 glass rounded-full text-xs text-gray-300 font-medium hover:text-white hover:glass-strong transition-all duration-300"
+                        >
+                          {skill}
+                        </motion.span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Hover glow effect */}
+                  <motion.div
+                    className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{
+                      background: `radial-gradient(circle at center, ${item.color.includes('blue') ? 'rgba(59, 130, 246, 0.1)' : item.color.includes('green') ? 'rgba(34, 197, 94, 0.1)' : 'rgba(147, 51, 234, 0.1)'} 0%, transparent 70%)`
+                    }}
+                  />
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
+
       </div>
     </section>
   );
