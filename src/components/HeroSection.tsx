@@ -72,6 +72,7 @@ export default function HeroSection() {
 
   return (
     <motion.section 
+      id="home"
       className="min-h-screen relative overflow-hidden bg-black flex items-center"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -233,48 +234,7 @@ export default function HeroSection() {
               <span className="font-semibold text-white">functional</span> web experiences
             </motion.p>
 
-            {/* Animated Stats */}
-            <motion.div 
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 2.5 }}
-              className="grid grid-cols-3 gap-6 mb-10"
-            >
-              {[
-                { number: yearsExperience, label: 'Years Experience', suffix: '+' },
-                { number: projectsCompleted, label: 'Projects', suffix: '+' },
-                { number: clientsSatisfied, label: 'Happy Clients', suffix: '+' },
-              ].map(({ number, label, suffix }, index) => (
-                <motion.div
-                  key={label}
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.8, delay: 3 + index * 0.2 }}
-                  whileHover={{ scale: 1.1, y: -5 }}
-                  className="glass-strong rounded-2xl p-4 text-center group cursor-pointer"
-                >
-                  <motion.div
-                    className="text-2xl lg:text-3xl font-black bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2"
-                    animate={{ 
-                      backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-                    }}
-                    transition={{ 
-                      duration: 3, 
-                      repeat: Infinity, 
-                      ease: "linear" 
-                    }}
-                    style={{ 
-                      backgroundSize: "200% 200%" 
-                    }}
-                  >
-                    {number}{suffix}
-                  </motion.div>
-                  <div className="text-sm text-gray-400 group-hover:text-white transition-colors">
-                    {label}
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
+            
 
             {/* Enhanced CTA Buttons */}
             <motion.div 
@@ -359,6 +319,7 @@ export default function HeroSection() {
                 </motion.a>
               ))}
             </motion.div>
+            
           </motion.div>
 
           {/* Right Side - Avatar */}
@@ -441,33 +402,7 @@ export default function HeroSection() {
           </motion.div>
         </div>
 
-        {/* Enhanced Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 5 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <motion.a
-            href="#about"
-            className="flex flex-col items-center gap-3 text-gray-400 hover:text-cyan-400 transition-colors group"
-            whileHover={{ scale: 1.1 }}
-          >
-            <span className="text-sm font-medium tracking-wider">Explore More</span>
-            <motion.div
-              className="flex flex-col items-center"
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <ChevronDown size={20} className="group-hover:text-cyan-400 transition-colors" />
-              <motion.div
-                className="w-0.5 h-8 bg-gradient-to-b from-cyan-400 to-transparent mt-1"
-                animate={{ scaleY: [0, 1, 0] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              />
-            </motion.div>
-          </motion.a>
-        </motion.div>
+        
       </motion.div>
     </motion.section>
   );

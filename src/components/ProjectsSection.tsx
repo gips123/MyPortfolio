@@ -169,7 +169,7 @@ export default function ProjectsSection() {
   }
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen py-32 overflow-hidden">
+    <section ref={sectionRef} id="projects" className="relative min-h-screen py-32 overflow-hidden">
       {/* Animated background */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900" />
@@ -501,88 +501,7 @@ export default function ProjectsSection() {
           </motion.div>
         </div>
 
-        {/* Other Projects Grid */}
-        {otherProjects.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            className="space-y-16"
-          >
-            <div className="text-center">
-              <h3 className="text-4xl font-black text-white mb-4">Other Projects</h3>
-              <p className="text-gray-400 text-lg">Additional projects and experiments</p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {otherProjects.map((project, index) => (
-                <motion.div
-                  key={project.id}
-                  initial={{ opacity: 0, y: 50, scale: 0.9 }}
-                  animate={isVisible ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.9 }}
-                  transition={{ duration: 0.8, delay: 0.7 + index * 0.2 }}
-                  onMouseEnter={() => setHoveredProject(project.id)}
-                  onMouseLeave={() => setHoveredProject(null)}
-                  className="glass-strong p-8 rounded-3xl hover:bg-white/5 transition-all duration-500 group relative overflow-hidden"
-                >
-                  {/* Project Icon */}
-                  <motion.div
-                    className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${project.color} flex items-center justify-center text-white text-xl font-bold mb-6 shadow-lg`}
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {project.title.split(' ').map((word: string) => word[0]).join('').slice(0, 2)}
-                  </motion.div>
-
-                  {/* Content */}
-                  <div className="space-y-4">
-                    <h4 className="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors duration-300">
-                      {project.title}
-                    </h4>
-                    <p className="text-gray-300 leading-relaxed">
-                      {project.description}
-                    </p>
-
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag: string, tagIndex: number) => (
-                        <span
-                          key={tagIndex}
-                          className="px-3 py-1 bg-white/10 text-white text-sm rounded-lg border border-white/10"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Actions */}
-                    <div className="flex gap-4 pt-4">
-                      <motion.a
-                        href={`/projects/${project.id}`}
-                        whileHover={{ scale: 1.05, y: -2 }}
-                        className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors duration-300"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                        <span className="text-sm font-medium">Detail</span>
-                      </motion.a>
-                      <motion.a
-                        href={project.githubUrl}
-                        whileHover={{ scale: 1.05, y: -2 }}
-                        className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors duration-300"
-                      >
-                        <Github className="w-4 h-4" />
-                        <span className="text-sm font-medium">Source</span>
-                      </motion.a>
-                    </div>
-                  </div>
-
-                  {/* Hover Glow */}
-                  <div className={`absolute inset-0 rounded-3xl bg-gradient-to-r ${project.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500 pointer-events-none`} />
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        )}
+        
       </div>
     </section>
   );

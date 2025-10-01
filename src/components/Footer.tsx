@@ -1,19 +1,32 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Heart, Coffee, Code, ArrowUp } from 'lucide-react';
+import { 
+  Heart, Coffee, Code, ArrowUp, Mail, Github, Linkedin, Twitter, 
+  Sparkles, Zap, Rocket, Star, MapPin, Calendar, Send, ExternalLink
+} from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 export default function Footer() {
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 500);
     };
 
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('mousemove', handleMouseMove);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
   }, []);
 
   const scrollToTop = () => {
@@ -23,101 +36,184 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const quickLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Home', href: '#home', icon: Rocket },
+    { name: 'About', href: '#about', icon: Star },
+    { name: 'Skills', href: '#skills', icon: Zap },
+    { name: 'Projects', href: '#projects', icon: Code },
+    { name: 'Contact', href: '#contact', icon: Send },
+  ];
+
+  const socialLinks = [
+    { 
+      name: 'GitHub', 
+      href: 'https://github.com/yourusername', 
+      icon: Github,
+      color: 'hover:text-gray-300 hover:bg-gray-800/30',
+      gradient: 'from-gray-400 to-gray-600'
+    },
+    { 
+      name: 'LinkedIn', 
+      href: 'https://linkedin.com/in/yourusername', 
+      icon: Linkedin,
+      color: 'hover:text-blue-400 hover:bg-blue-900/30',
+      gradient: 'from-blue-400 to-blue-600'
+    },
+    { 
+      name: 'Twitter', 
+      href: 'https://twitter.com/yourusername', 
+      icon: Twitter,
+      color: 'hover:text-sky-400 hover:bg-sky-900/30',
+      gradient: 'from-sky-400 to-sky-600'
+    },
+    { 
+      name: 'Email', 
+      href: 'mailto:ghifary.ahmad@example.com', 
+      icon: Mail,
+      color: 'hover:text-red-400 hover:bg-red-900/30',
+      gradient: 'from-red-400 to-red-600'
+    },
+  ];
+
+  const techStack = [
+    { name: 'Next.js', color: 'from-gray-400 to-gray-600' },
+    { name: 'React', color: 'from-blue-400 to-cyan-400' },
+    { name: 'TypeScript', color: 'from-blue-600 to-blue-800' },
+    { name: 'Tailwind CSS', color: 'from-cyan-400 to-blue-500' },
+    { name: 'Framer Motion', color: 'from-purple-400 to-pink-500' },
+    { name: 'Node.js', color: 'from-green-400 to-green-600' },
   ];
 
   return (
-    <footer className="relative bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white overflow-hidden">
-      {/* Background decorations */}
+    <footer className="relative bg-gradient-to-br from-black via-gray-900 to-black text-white overflow-hidden">
+      {/* Enhanced Background with Glassmorphism */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Dynamic gradient orbs */}
         <motion.div
-          className="absolute top-10 left-10 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl"
+          className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-cyan-400/20 to-blue-600/20 rounded-full blur-3xl"
           animate={{
-            scale: [1, 1.2, 1],
+            scale: [1, 1.3, 1],
+            rotate: [0, 180, 360],
             opacity: [0.3, 0.6, 0.3],
           }}
           transition={{
-            duration: 8,
+            duration: 25,
             repeat: Infinity,
             ease: "easeInOut",
           }}
         />
         <motion.div
-          className="absolute bottom-10 right-10 w-24 h-24 bg-purple-500/10 rounded-full blur-3xl"
+          className="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-r from-purple-400/20 to-pink-600/20 rounded-full blur-3xl"
           animate={{
-            scale: [1.2, 1, 1.2],
+            scale: [1.3, 1, 1.3],
+            rotate: [360, 180, 0],
             opacity: [0.6, 0.3, 0.6],
           }}
           transition={{
-            duration: 10,
+            duration: 30,
             repeat: Infinity,
             ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-green-400/15 to-cyan-500/15 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.4, 1],
+            rotate: [0, -180, -360],
+          }}
+          transition={{
+            duration: 35,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        {/* Floating particles */}
+        {[...Array(12)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 bg-cyan-400/40 rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -40, 0],
+              x: [0, Math.random() * 30 - 15, 0],
+              opacity: [0.2, 1, 0.2],
+              scale: [0.5, 1.2, 0.5],
+            }}
+            transition={{
+              duration: 4 + Math.random() * 3,
+              repeat: Infinity,
+              delay: Math.random() * 3,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+
+        {/* Interactive mouse follower */}
+        <motion.div
+          className="absolute w-96 h-96 bg-gradient-to-r from-cyan-500/5 to-purple-500/5 rounded-full blur-3xl pointer-events-none"
+          animate={{
+            x: mousePosition.x - 192,
+            y: mousePosition.y - 192,
+          }}
+          transition={{
+            type: "spring",
+            damping: 50,
+            stiffness: 100,
           }}
         />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid lg:grid-cols-3 gap-12 mb-12">
-          {/* Brand section */}
+      {/* Simple Footer Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        {/* Main Footer Content */}
+        <div className="grid md:grid-cols-3 gap-8 mb-8">
+          
+          {/* Brand & Info */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="lg:col-span-1"
           >
-            <div className="mb-6">
-              <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-2">
+            <h3 className="text-xl font-bold mb-3">
+              <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
                 Ghifary Ahmad
-              </h3>
-              <p className="text-gray-300 leading-relaxed">
-                Full Stack Developer & UI/UX Designer passionate about creating exceptional digital experiences.
-              </p>
-            </div>
-            
-            <div className="flex items-center gap-2 text-sm text-gray-400">
+              </span>
+            </h3>
+            <p className="text-gray-400 text-sm mb-4 leading-relaxed">
+              Full Stack Developer & UI/UX Designer creating exceptional digital experiences.
+            </p>
+            <div className="flex items-center gap-2 text-xs text-gray-500">
               <span>Made with</span>
               <motion.div
                 animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 1, repeat: Infinity }}
-              >
-                <Heart size={16} className="text-red-400" />
-              </motion.div>
-              <span>and</span>
-              <motion.div
-                animate={{ rotate: [0, 10, -10, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                <Coffee size={16} className="text-amber-400" />
+                <Heart size={12} className="text-red-400" />
               </motion.div>
-              <span>in Jakarta</span>
+              <span>in Jakarta, Indonesia</span>
             </div>
           </motion.div>
 
-          {/* Quick links */}
+          {/* Quick Links */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="lg:col-span-1"
           >
-            <h4 className="text-lg font-semibold mb-6">Quick Links</h4>
-            <div className="space-y-3">
+            <h4 className="text-white font-semibold mb-4">Navigation</h4>
+            <div className="space-y-2">
               {quickLinks.map((link, index) => (
                 <motion.a
                   key={link.name}
                   href={link.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.4, delay: 0.1 * index }}
-                  viewport={{ once: true }}
                   whileHover={{ x: 5 }}
-                  className="block text-gray-300 hover:text-white transition-all duration-300 hover:text-blue-400"
+                  className="block text-gray-400 hover:text-cyan-400 transition-colors duration-300 text-sm"
                 >
                   {link.name}
                 </motion.a>
@@ -125,64 +221,57 @@ export default function Footer() {
             </div>
           </motion.div>
 
-          {/* Tech stack */}
+          {/* Social Links */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
-            className="lg:col-span-1"
           >
-            <h4 className="text-lg font-semibold mb-6">Built With</h4>
-            <div className="flex flex-wrap gap-2">
-              {['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'].map((tech, index) => (
-                <motion.span
-                  key={tech}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.4, delay: 0.1 * index }}
-                  viewport={{ once: true }}
-                  whileHover={{ scale: 1.05 }}
-                  className="px-3 py-1 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-sm text-gray-300 hover:bg-white/20 hover:text-white transition-all duration-300 cursor-default"
+            <h4 className="text-white font-semibold mb-4">Connect</h4>
+            <div className="flex gap-4 mb-4">
+              {socialLinks.map((social, index) => (
+                <motion.a
+                  key={social.name}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileTap={{ scale: 0.9 }}
+                  className={`
+                    p-2 glass rounded-lg border border-white/10 text-gray-400 
+                    hover:border-white/20 transition-all duration-300 ${social.color}
+                  `}
+                  aria-label={social.name}
                 >
-                  {tech}
-                </motion.span>
+                  <social.icon size={18} />
+                </motion.a>
               ))}
             </div>
-            
-            <div className="mt-6 flex items-center gap-2 text-sm text-gray-400">
-              <Code size={16} />
-              <span>Open source on GitHub</span>
-            </div>
+            <p className="text-xs text-gray-500 flex items-center gap-2">
+              <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+              Available for projects
+            </p>
           </motion.div>
         </div>
 
-        {/* Bottom section */}
+        {/* Bottom Bar */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
           viewport={{ once: true }}
-          className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4"
+          className="pt-6 border-t border-white/10"
         >
-          <div className="text-center md:text-left">
-            <p className="text-gray-400">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-gray-500 text-sm">
               © {currentYear} Ghifary Ahmad. All rights reserved.
             </p>
-            <p className="text-sm text-gray-500 mt-1">
-              Designed & Developed with passion for great user experiences.
-            </p>
-          </div>
-          
-          <div className="flex items-center gap-4">
-            <motion.button
-              onClick={() => window.open('mailto:ghifary.ahmad@example.com')}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
-            >
-              Let's Talk
-            </motion.button>
+            <div className="flex gap-6 text-xs text-gray-500">
+              <span>Jakarta, Indonesia</span>
+              <span>•</span>
+              <span>Full Stack Developer</span>
+            </div>
           </div>
         </motion.div>
       </div>

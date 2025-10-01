@@ -133,99 +133,53 @@ export default function AboutSection() {
               {/* Animated gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
               
-              <div className="grid lg:grid-cols-12 gap-8 items-center relative z-10">
-                {/* Left - Avatar & Quick Info */}
-                <div className="lg:col-span-4 text-center lg:text-left">
-                  {/* Levitating Avatar */}
+              <div className="grid lg:grid-cols-12 gap-8 items-start relative z-10">
+                {/* Left - Personality Traits */}
+                <div className="lg:col-span-5 space-y-6">
                   <motion.div
-                    className="relative w-48 h-48 mx-auto lg:mx-0 mb-8"
-                    animate={{ 
-                      y: [0, -10, 0],
-                      rotate: [0, 2, -2, 0]
-                    }}
-                    transition={{ 
-                      duration: 6, 
-                      repeat: Infinity, 
-                      ease: "easeInOut" 
-                    }}
+                    initial={{ opacity: 0, x: -100 }}
+                    animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -100 }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
                   >
-                    <div className="relative w-full h-full">
-                      {/* Glow ring */}
-                      <motion.div
-                        className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 blur-2xl opacity-50"
-                        animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
-                        transition={{ duration: 3, repeat: Infinity }}
-                      />
-                      
-                      {/* Main avatar */}
-                      <motion.div
-                        className="relative w-full h-full rounded-3xl glass-strong flex items-center justify-center text-white text-4xl font-bold overflow-hidden"
-                        whileHover={{ scale: 1.05, rotateY: 15 }}
-                        style={{ transformStyle: "preserve-3d" }}
-                      >
-                        <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 opacity-90" />
-                        <span className="relative z-10 text-5xl">GA</span>
-                        
-                        {/* Floating particles */}
-                        {[...Array(6)].map((_, i) => (
-                          <motion.div
-                            key={i}
-                            className="absolute w-2 h-2 bg-white rounded-full opacity-60"
-                            animate={{
-                              x: [0, Math.random() * 100 - 50],
-                              y: [0, Math.random() * 100 - 50],
-                              opacity: [0, 1, 0],
-                            }}
-                            transition={{
-                              duration: 3,
-                              repeat: Infinity,
-                              delay: i * 0.5,
-                            }}
-                            style={{
-                              left: `${Math.random() * 100}%`,
-                              top: `${Math.random() * 100}%`,
-                            }}
-                          />
-                        ))}
-                      </motion.div>
-                    </div>
                   </motion.div>
 
-                  {/* Achievement Badges */}
-                  <div className="grid grid-cols-2 gap-3 mb-6">
-                    {achievements.map((achievement, index) => (
+                  {/* Personality Traits */}
+                  <motion.div 
+                    className="space-y-4"
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+                    transition={{ duration: 0.8, delay: 0.7 }}
+                  >
+                    {[
+                      { icon: Coffee, title: "Coffee Enthusiast", desc: "Powered by caffeine & creativity", color: "text-amber-400" },
+                      { icon: Heart, title: "Open Source Advocate", desc: "Building for the community", color: "text-red-400" },
+                      { icon: Sparkles, title: "Continuous Learner", desc: "Always exploring new frontiers", color: "text-purple-400" }
+                    ].map((trait, index) => (
                       <motion.div
-                        key={achievement.label}
-                        initial={{ opacity: 0, scale: 0, rotateY: 90 }}
-                        animate={isVisible ? { opacity: 1, scale: 1, rotateY: 0 } : { opacity: 0, scale: 0, rotateY: 90 }}
-                        transition={{ duration: 0.8, delay: 0.5 + index * 0.15 }}
-                        whileHover={{ scale: 1.1, rotateX: 10 }}
-                        className="glass rounded-xl p-4 hover:glass-strong transition-all duration-300"
+                        key={trait.title}
+                        initial={{ opacity: 0, rotateX: 90 }}
+                        animate={isVisible ? { opacity: 1, rotateX: 0 } : { opacity: 0, rotateX: 90 }}
+                        transition={{ duration: 0.6, delay: 0.9 + index * 0.2 }}
+                        whileHover={{ scale: 1.05, rotateY: 10 }}
+                        className="glass rounded-xl p-4 hover:glass-strong transition-all duration-300 group"
                       >
-                        <achievement.icon className="w-6 h-6 mx-auto mb-2 text-blue-400" />
-                        <motion.div 
-                          className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
-                          initial={{ opacity: 0 }}
-                          animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
-                          transition={{ duration: 0.5, delay: 1 + index * 0.1 }}
-                        >
-                          {achievement.number}
-                        </motion.div>
-                        <div className="text-xs text-gray-300 font-medium">{achievement.label}</div>
+                        <trait.icon className={`w-6 h-6 ${trait.color} mb-3 group-hover:scale-110 transition-transform`} />
+                        <div className="text-white font-semibold text-sm mb-1">{trait.title}</div>
+                        <div className="text-gray-400 text-xs">{trait.desc}</div>
                       </motion.div>
                     ))}
-                  </div>
+                  </motion.div>
                 </div>
 
-                {/* Right - Story & Personality */}
-                <div className="lg:col-span-8 space-y-8">
+                {/* Right - Story */}
+                <div className="lg:col-span-7 space-y-6">
                   <motion.div
                     initial={{ opacity: 0, x: 100 }}
                     animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 100 }}
                     transition={{ duration: 0.8, delay: 0.7 }}
                   >
                     <motion.h3 
-                      className="text-5xl md:text-6xl font-black mb-6 leading-tight"
+                      className="text-4xl md:text-5xl font-black mb-6 leading-tight"
                       animate={isVisible ? { 
                         backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] 
                       } : {}}
@@ -263,33 +217,6 @@ export default function AboutSection() {
                         I don't just build applications—I create digital experiences that leave lasting impressions.
                       </motion.p>
                     </div>
-                  </motion.div>
-
-                  {/* Personality Traits */}
-                  <motion.div 
-                    className="grid grid-cols-1 md:grid-cols-3 gap-4"
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-                    transition={{ duration: 0.8, delay: 1.3 }}
-                  >
-                    {[
-                      { icon: Coffee, title: "Coffee Enthusiast", desc: "Powered by caffeine & creativity", color: "text-amber-400" },
-                      { icon: Heart, title: "Open Source Advocate", desc: "Building for the community", color: "text-red-400" },
-                      { icon: Sparkles, title: "Continuous Learner", desc: "Always exploring new frontiers", color: "text-purple-400" }
-                    ].map((trait, index) => (
-                      <motion.div
-                        key={trait.title}
-                        initial={{ opacity: 0, rotateX: 90 }}
-                        animate={isVisible ? { opacity: 1, rotateX: 0 } : { opacity: 0, rotateX: 90 }}
-                        transition={{ duration: 0.6, delay: 1.5 + index * 0.2 }}
-                        whileHover={{ scale: 1.05, rotateY: 10 }}
-                        className="glass rounded-xl p-4 hover:glass-strong transition-all duration-300 group"
-                      >
-                        <trait.icon className={`w-6 h-6 ${trait.color} mb-3 group-hover:scale-110 transition-transform`} />
-                        <div className="text-white font-semibold text-sm mb-1">{trait.title}</div>
-                        <div className="text-gray-400 text-xs">{trait.desc}</div>
-                      </motion.div>
-                    ))}
                   </motion.div>
                 </div>
               </div>
