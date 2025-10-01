@@ -3,19 +3,7 @@
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
 import { ExternalLink, Github, Sparkles, Star, Eye, ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
 import { useEffect, useRef, useState, useCallback } from 'react';
-
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  longDescription?: string;
-  image: string;
-  tags: string[];
-  liveUrl: string;
-  githubUrl: string;
-  color: string;
-  featured: boolean;
-}
+import { getFeaturedProjects, type ProjectDetail } from '@/data/projects';
 
 export default function ProjectsSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -52,71 +40,8 @@ export default function ProjectsSection() {
     return () => observer.disconnect();
   }, []);
 
-  const projects: Project[] = [
-    {
-      id: 1,
-      title: 'E-Commerce Platform',
-      description: 'A full-stack e-commerce solution with modern UI, secure payments, inventory management, and advanced analytics dashboard.',
-      longDescription: 'Built with cutting-edge technologies to deliver exceptional user experience with real-time updates, secure authentication, and scalable architecture.',
-      image: '/api/placeholder/600/400',
-      tags: ['Next.js', 'TypeScript', 'Stripe', 'PostgreSQL', 'Tailwind CSS'],
-      liveUrl: '#',
-      githubUrl: '#',
-      color: 'from-emerald-500 to-teal-600',
-      featured: true,
-    },
-    {
-      id: 2,
-      title: 'Task Management App',
-      description: 'A collaborative task management application with real-time sync, team features, advanced filtering, and productivity analytics.',
-      longDescription: 'Designed for modern teams with real-time collaboration, advanced project tracking, and seamless integration with popular tools.',
-      image: '/api/placeholder/600/400',
-      tags: ['React', 'Node.js', 'MongoDB', 'Socket.io', 'Material-UI'],
-      liveUrl: '#',
-      githubUrl: '#',
-      color: 'from-orange-500 to-red-600',
-      featured: true,
-    },
-    {
-      id: 3,
-      title: 'AI Chat Application',
-      description: 'An intelligent chat application powered by AI with natural language processing, conversation history, and customizable personas.',
-      longDescription: 'Integration with modern AI APIs to create engaging conversational experiences with advanced natural language processing capabilities.',
-      image: '/api/placeholder/600/400',
-      tags: ['React', 'OpenAI API', 'Express.js', 'WebSocket', 'PostgreSQL'],
-      liveUrl: '#',
-      githubUrl: '#',
-      color: 'from-cyan-500 to-blue-600',
-      featured: true,
-    },
-    {
-      id: 4,
-      title: 'Portfolio Website',
-      description: 'A stunning portfolio website with modern animations, dark mode support, and responsive design showcasing creative projects.',
-      longDescription: 'This portfolio demonstrates advanced frontend skills with smooth animations, optimized performance, and modern web technologies.',
-      image: '/api/placeholder/600/400',
-      tags: ['Next.js', 'Framer Motion', 'Tailwind CSS', 'TypeScript'],
-      liveUrl: '#',
-      githubUrl: '#',
-      color: 'from-purple-500 to-pink-600',
-      featured: false,
-    },
-    {
-      id: 5,
-      title: 'Mobile Banking App',
-      description: 'A secure mobile banking application with biometric authentication, real-time transactions, and comprehensive financial analytics.',
-      longDescription: 'Full-featured banking solution with advanced security measures, intuitive UI/UX, and seamless integration with financial services.',
-      image: '/api/placeholder/600/400',
-      tags: ['React Native', 'Firebase', 'Plaid API', 'Redux', 'TypeScript'],
-      liveUrl: '#',
-      githubUrl: '#',
-      color: 'from-indigo-500 to-purple-600',
-      featured: false,
-    },
-  ];
-
-  const featuredProjects = projects.filter(p => p.featured);
-  const otherProjects = projects.filter(p => !p.featured);
+  // Get projects from global data
+  const featuredProjects = getFeaturedProjects();
 
   // Auto-play functionality
   const startAutoPlay = useCallback(() => {
@@ -275,29 +200,25 @@ export default function ProjectsSection() {
                       }}
                     >
                       {/* Project Image Container */}
-                      <div className="relative w-full h-full rounded-3xl overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+                      <div className="relative w-full h-full rounded-3xl overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900">
+                        {/* Background Image */}
                         <motion.div
-                          initial={{ opacity: 0, scale: 0.9 }}
+                          initial={{ opacity: 0, scale: 1.1 }}
                           animate={{ opacity: 1, scale: 1 }}
-                          transition={{ duration: 1 }}
-                          className={`relative w-32 h-32 rounded-3xl bg-gradient-to-br ${featuredProjects[currentSlide].color} flex items-center justify-center text-white text-4xl font-black shadow-2xl`}
+                          transition={{ duration: 1.2 }}
+                          className="absolute inset-0"
                         >
-                          <motion.div
-                            animate={hoveredProject === featuredProjects[currentSlide].id ? {
-                              scale: 1.15,
-                              rotate: 360
-                            } : {
-                              scale: 1,
-                              rotate: 0
+                          <img
+                            src={featuredProjects[currentSlide].image}
+                            alt={featuredProjects[currentSlide].title}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              // Fallback jika gambar tidak ditemukan
+                              e.currentTarget.style.display = 'none';
                             }}
-                            transition={{ 
-                              duration: 1.2,
-                              ease: [0.34, 1.56, 0.64, 1],
-                              rotate: { duration: 1.5, ease: "easeInOut" }
-                            }}
-                          >
-                            {featuredProjects[currentSlide].title.split(' ').map((word: string) => word[0]).join('').slice(0, 2)}
-                          </motion.div>
+                          />
+                          {/* Overlay ringan untuk kontras */}
+                          <div className="absolute inset-0 bg-black/20" />
                         </motion.div>
 
                         {/* Floating Action Buttons */}
@@ -342,24 +263,6 @@ export default function ProjectsSection() {
                       >
                         Featured
                       </motion.div>
-
-                      {/* Glow Effects */}
-                      <div className={`absolute inset-0 rounded-3xl bg-gradient-to-r ${featuredProjects[currentSlide].color} opacity-0 group-hover:opacity-20 transition-opacity duration-700 blur-xl`} />
-                      
-                      <motion.div
-                        className={`absolute -z-10 inset-0 rounded-3xl bg-gradient-to-r ${featuredProjects[currentSlide].color} opacity-20 blur-2xl scale-105`}
-                        animate={hoveredProject === featuredProjects[currentSlide].id ? {
-                          scale: 1.2,
-                          opacity: 0.4
-                        } : {
-                          scale: 1.05,
-                          opacity: 0.2
-                        }}
-                        transition={{ 
-                          duration: 0.8,
-                          ease: [0.25, 0.46, 0.45, 0.94]
-                        }}
-                      />
                     </motion.div>
                   </div>
 
@@ -411,7 +314,7 @@ export default function ProjectsSection() {
                         className="space-y-4"
                       >
                         <p className="text-gray-300 text-lg leading-relaxed">
-                          {featuredProjects[currentSlide].longDescription || featuredProjects[currentSlide].description}
+                          {featuredProjects[currentSlide].description || featuredProjects[currentSlide].description}
                         </p>
                       </motion.div>
 

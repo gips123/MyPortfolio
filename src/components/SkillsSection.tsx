@@ -62,10 +62,10 @@ const skillDomains = [
     bgGradient: 'bg-gradient-to-br from-blue-500/10 to-cyan-500/10',
     level: 'Expert',
     skills: [
-      { name: 'React/Next.js', level: 95, category: 'Framework', experience: '3+ years', icon: Atom },
-      { name: 'TypeScript', level: 90, category: 'Language', experience: '2+ years', icon: FileCode },
-      { name: 'Tailwind CSS', level: 95, category: 'Styling', experience: '2+ years', icon: Paintbrush },
-      { name: 'Framer Motion', level: 85, category: 'Animation', experience: '1+ years', icon: Layers },
+      { name: 'React/Next.js', level: 95, category: 'Framework', icon: Atom },
+      { name: 'TypeScript', level: 90, category: 'Language', icon: FileCode },
+      { name: 'Tailwind CSS', level: 95, category: 'Styling', icon: Paintbrush },
+      { name: 'Framer Motion', level: 80, category: 'Animation', icon: Layers },
     ]
   },
   {
@@ -79,7 +79,7 @@ const skillDomains = [
     skills: [
       { name: 'Node.js', level: 88, category: 'Runtime', experience: '2+ years', icon: Terminal },
       { name: 'Express.js', level: 85, category: 'Framework', experience: '2+ years', icon: Zap },
-      { name: 'PostgreSQL', level: 80, category: 'Database', experience: '1+ years', icon: Database },
+      { name: 'MySQL', level: 80, category: 'Database', experience: '1+ years', icon: Database },
       { name: 'MongoDB', level: 82, category: 'Database', experience: '1+ years', icon: Database },
     ]
   },
@@ -93,9 +93,9 @@ const skillDomains = [
     level: 'Advanced',
     skills: [
       { name: 'Figma', level: 85, category: 'Design Tool', experience: '2+ years', icon: Box },
-      { name: 'Adobe XD', level: 75, category: 'Design Tool', experience: '1+ years', icon: Layers },
-      { name: 'Prototyping', level: 80, category: 'Skill', experience: '2+ years', icon: Settings },
-      { name: 'User Research', level: 70, category: 'Skill', experience: '1+ years', icon: Star },
+      { name: 'Canva', level: 95, category: 'Design Tool', experience: '1+ years', icon: Layers },
+      { name: 'Prototyping', level: 85, category: 'Skill', experience: '2+ years', icon: Settings },
+      { name: 'User Research', level: 80, category: 'Skill', experience: '1+ years', icon: Star },
     ]
   }
 ];
@@ -290,9 +290,6 @@ const allTechnologies = [
                               <p className="font-semibold text-white text-sm">
                                 {skill.name}
                               </p>
-                              <p className="text-xs text-gray-400">
-                                {skill.experience}
-                              </p>
                             </div>
                           </div>
                           
@@ -343,81 +340,6 @@ const allTechnologies = [
             </motion.div>
           ))}
         </div>
-
-        {/* Interactive Tech Constellation */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-          transition={{ duration: 1, delay: 1.5 }}
-          className="relative mb-16"
-        >
-          <div className="text-center mb-12">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.8, delay: 1.7 }}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass-strong text-cyan-400 font-semibold mb-6 border border-cyan-400/20"
-            >
-              <Zap className="w-5 h-5" />
-              Technology Stack
-            </motion.div>
-            <h3 className="text-4xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-                My Digital Arsenal
-              </span>
-            </h3>
-          </div>
-
-          {/* Tech Grid with Hover Effects */}
-          <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-4 max-w-5xl mx-auto">
-            {allTechnologies.map((tech, index) => (
-              <motion.div
-                key={tech.name}
-                initial={{ opacity: 0, scale: 0, rotate: -180 }}
-                animate={isVisible ? { 
-                  opacity: 1, 
-                  scale: 1, 
-                  rotate: 0 
-                } : { 
-                  opacity: 0, 
-                  scale: 0, 
-                  rotate: -180 
-                }}
-                transition={{ 
-                  duration: 0.8, 
-                  delay: 1.9 + index * 0.05,
-                  type: "spring",
-                  stiffness: 200
-                }}
-                whileHover={{ 
-                  scale: 1.2, 
-                  y: -8,
-                  rotate: [0, -5, 5, 0],
-                  transition: { duration: 0.4 }
-                }}
-                className="group/tech relative"
-              >
-                <div className={`relative p-4 rounded-2xl glass-subtle hover:glass-strong transition-all duration-400 hover:shadow-xl cursor-pointer border border-white/5 hover:border-white/20`}>
-                  {/* Tech Icon */}
-                  <div className="text-center">
-                    <div className="mb-2 group-hover/tech:scale-110 transition-transform duration-300 text-white">
-                      <tech.icon className="w-8 h-8 mx-auto" />
-                    </div>
-                    <p className="text-xs font-medium text-gray-400 group-hover/tech:text-white transition-colors duration-300 truncate">
-                      {tech.name}
-                    </p>
-                  </div>
-
-                  {/* Skill Level Dot */}
-                  <div className={`absolute -top-1 -right-1 w-3 h-3 rounded-full bg-gradient-to-r ${tech.color} opacity-60 group-hover/tech:opacity-100 transition-opacity duration-300`} />
-                  
-                  {/* Hover Glow */}
-                  <div className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${tech.color} opacity-0 group-hover/tech:opacity-20 transition-opacity duration-400 blur-sm`} />
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );

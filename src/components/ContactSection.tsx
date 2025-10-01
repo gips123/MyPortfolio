@@ -29,15 +29,15 @@ export default function ContactSection() {
     {
       icon: Mail,
       title: 'Email',
-      value: 'ghifary.ahmad@example.com',
-      href: 'mailto:ghifary.ahmad@example.com',
+      value: 'ghifaryahmadwrap@gmail.com',
+      href: 'mailto:ghifaryahmadwrap@gmail.com',
       color: 'from-red-500 to-pink-500',
     },
     {
       icon: Phone,
       title: 'Phone',
-      value: '+62 812-3456-7890',
-      href: 'tel:+628123456790',
+      value: '+62 852-1900-8008',
+      href: 'tel:+6285219008008',
       color: 'from-green-500 to-emerald-500',
     },
     {

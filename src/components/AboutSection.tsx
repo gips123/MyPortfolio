@@ -51,14 +51,14 @@ export default function AboutSection() {
     {
       title: 'Backend Engineering',
       description: 'Developing scalable server-side applications and APIs with Node.js ecosystem.',
-      skills: ['Node.js', 'Express.js', 'MongoDB', 'PostgreSQL', 'GraphQL'],
+      skills: ['Node.js', 'Express.js', 'MongoDB', 'MySQL', 'Strapi'],
       color: 'from-green-500 to-emerald-500',
       percentage: 88,
     },
     {
       title: 'Design Systems',
       description: 'Creating cohesive design languages and user experiences that delight users.',
-      skills: ['Figma', 'Adobe XD', 'UI/UX', 'Design Tokens', 'Prototyping'],
+      skills: ['Figma', 'Canva', 'UI/UX', 'Prototyping'],
       color: 'from-purple-500 to-pink-500',
       percentage: 90,
     },
@@ -129,13 +129,13 @@ export default function AboutSection() {
             transition={{ duration: 1.2, delay: 0.3 }}
             className="relative max-w-6xl mx-auto"
           >
-            <div className="glass-strong rounded-3xl p-8 md:p-12 relative overflow-hidden group">
+            <div className="glass-strong rounded-3xl p-8 md:p-10 lg:p-12 relative overflow-hidden group">
               {/* Animated gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
               
-              <div className="grid lg:grid-cols-12 gap-8 items-start relative z-10">
+              <div className="grid lg:grid-cols-12 gap-8 items-center relative z-10">
                 {/* Left - Personality Traits */}
-                <div className="lg:col-span-5 space-y-6">
+                <div className="lg:col-span-5 space-y-4">
                   <motion.div
                     initial={{ opacity: 0, x: -100 }}
                     animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -100 }}
@@ -161,18 +161,18 @@ export default function AboutSection() {
                         animate={isVisible ? { opacity: 1, rotateX: 0 } : { opacity: 0, rotateX: 90 }}
                         transition={{ duration: 0.6, delay: 0.9 + index * 0.2 }}
                         whileHover={{ scale: 1.05, rotateY: 10 }}
-                        className="glass rounded-xl p-4 hover:glass-strong transition-all duration-300 group"
+                        className="glass rounded-xl p-6 hover:glass-strong transition-all duration-300 group"
                       >
                         <trait.icon className={`w-6 h-6 ${trait.color} mb-3 group-hover:scale-110 transition-transform`} />
-                        <div className="text-white font-semibold text-sm mb-1">{trait.title}</div>
-                        <div className="text-gray-400 text-xs">{trait.desc}</div>
+                        <div className="text-white font-semibold text-base mb-2">{trait.title}</div>
+                        <div className="text-gray-400 text-sm leading-relaxed">{trait.desc}</div>
                       </motion.div>
                     ))}
                   </motion.div>
                 </div>
 
                 {/* Right - Story */}
-                <div className="lg:col-span-7 space-y-6">
+                <div className="lg:col-span-7 space-y-6 lg:pl-4">
                   <motion.div
                     initial={{ opacity: 0, x: 100 }}
                     animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 100 }}
@@ -256,7 +256,7 @@ export default function AboutSection() {
           </div>
 
           {/* 3D Skills Grid */}
-          <div className="grid lg:grid-cols-3 gap-8 perspective-1000">
+          <div className="grid lg:grid-cols-3 gap-6 perspective-1000">
             {expertise.map((item, index) => (
               <motion.div
                 key={item.title}
@@ -278,7 +278,7 @@ export default function AboutSection() {
                 className="group transform-gpu"
                 style={{ transformStyle: "preserve-3d" }}
               >
-                <div className="glass-strong rounded-3xl p-8 h-full relative overflow-hidden group-hover:glass transition-all duration-500">
+                <div className="glass-strong rounded-3xl p-6 h-full relative overflow-hidden group-hover:glass transition-all duration-500 flex flex-col">
                   {/* Animated background gradient */}
                   <motion.div
                     className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
@@ -294,7 +294,7 @@ export default function AboutSection() {
 
                   {/* Floating Icon */}
                   <motion.div
-                    className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${item.color} flex items-center justify-center mb-6 relative z-10`}
+                    className={`w-14 h-14 rounded-2xl bg-gradient-to-r ${item.color} flex items-center justify-center mb-6 mx-auto relative z-10`}
                     animate={{ 
                       y: [0, -8, 0],
                       rotate: [0, 5, -5, 0]
@@ -330,31 +330,31 @@ export default function AboutSection() {
                     ))}
                   </motion.div>
 
-                  <div className="relative z-10">
-                    <h4 className="text-2xl font-bold text-white mb-3 group-hover:text-blue-100 transition-colors">
+                  <div className="relative z-10 text-center flex-1 flex flex-col">
+                    <h4 className="text-xl font-bold text-white mb-3 group-hover:text-blue-100 transition-colors">
                       {item.title}
                     </h4>
-                    <p className="text-gray-300 leading-relaxed mb-6 group-hover:text-gray-200 transition-colors">
+                    <p className="text-gray-300 leading-relaxed mb-6 group-hover:text-gray-200 transition-colors flex-1">
                       {item.description}
                     </p>
 
                     {/* Animated Progress Ring */}
-                    <div className="relative w-20 h-20 mx-auto mb-6">
-                      <svg className="w-20 h-20 transform -rotate-90" viewBox="0 0 80 80">
+                    <div className="relative w-16 h-16 mx-auto mb-6">
+                      <svg className="w-16 h-16 transform -rotate-90" viewBox="0 0 64 64">
                         <circle
-                          cx="40"
-                          cy="40"
-                          r="30"
+                          cx="32"
+                          cy="32"
+                          r="24"
                           stroke="rgba(255,255,255,0.1)"
-                          strokeWidth="8"
+                          strokeWidth="6"
                           fill="none"
                         />
                         <motion.circle
-                          cx="40"
-                          cy="40"
-                          r="30"
+                          cx="32"
+                          cy="32"
+                          r="24"
                           stroke={`url(#gradient-${index})`}
-                          strokeWidth="8"
+                          strokeWidth="6"
                           fill="none"
                           strokeLinecap="round"
                           initial={{ pathLength: 0 }}
@@ -371,7 +371,7 @@ export default function AboutSection() {
                       </svg>
                       <div className="absolute inset-0 flex items-center justify-center">
                         <motion.span
-                          className="text-lg font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+                          className="text-sm font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
                           initial={{ opacity: 0, scale: 0 }}
                           animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
                           transition={{ duration: 0.5, delay: 3.5 + index * 0.2 }}

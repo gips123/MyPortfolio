@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Download, ExternalLink, Github, Linkedin, Mail, ChevronDown } from 'lucide-react';
+import Image from 'next/image';
 
 export default function HeroSection() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -346,33 +347,43 @@ export default function HeroSection() {
 
               {/* Main avatar */}
               <motion.div
-                className="w-full h-full rounded-3xl glass-strong flex items-center justify-center text-white text-6xl lg:text-8xl font-black relative overflow-hidden shadow-2xl"
+                className="w-full h-full rounded-3xl relative overflow-hidden shadow-2xl"
                 whileHover={{ 
                   scale: 1.1,
                   rotateY: 15,
-                  boxShadow: "0 0 100px rgba(59, 130, 246, 0.8)",
                 }}
                 whileTap={{ scale: 0.95 }}
-                animate={{ 
-                  boxShadow: [
-                    "0 0 40px rgba(59, 130, 246, 0.6)", 
-                    "0 0 80px rgba(147, 51, 234, 0.8)", 
-                    "0 0 60px rgba(236, 72, 153, 0.7)",
-                    "0 0 40px rgba(59, 130, 246, 0.6)"
-                  ]
-                }}
-                transition={{ 
-                  boxShadow: { duration: 3, repeat: Infinity, ease: "easeInOut" }
-                }}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/80 via-purple-500/80 to-pink-500/80 rounded-3xl" />
-                <motion.span 
-                  className="relative z-10"
-                  animate={{ rotateY: [0, 10, -10, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  GA
-                </motion.span>
+                {/* Glow effect behind photo */}
+                <motion.div
+                  className="absolute inset-0 glass-strong rounded-3xl"
+                  animate={{ 
+                    boxShadow: [
+                      "0 0 40px rgba(59, 130, 246, 0.6)", 
+                      "0 0 80px rgba(147, 51, 234, 0.8)", 
+                      "0 0 60px rgba(236, 72, 153, 0.7)",
+                      "0 0 40px rgba(59, 130, 246, 0.6)"
+                    ]
+                  }}
+                  whileHover={{
+                    boxShadow: "0 0 120px rgba(59, 130, 246, 1.0)"
+                  }}
+                  transition={{ 
+                    boxShadow: { duration: 3, repeat: Infinity, ease: "easeInOut" }
+                  }}
+                />
+                
+                {/* Profile Photo - Front layer */}
+                <Image
+                  src="/me/me.jpg"
+                  alt="Ghifary Ahmad"
+                  fill
+                  className="object-cover rounded-3xl relative z-20"
+                  priority
+                />
+                
+                {/* Subtle gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10 rounded-3xl z-10" />
                 
                 {/* Floating particles around avatar */}
                 {[...Array(12)].map((_, i) => (
