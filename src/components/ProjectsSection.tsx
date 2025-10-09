@@ -213,11 +213,9 @@ export default function ProjectsSection() {
                             alt={featuredProjects[currentSlide].title}
                             className="w-full h-full object-cover"
                             onError={(e) => {
-                              // Fallback jika gambar tidak ditemukan
                               e.currentTarget.style.display = 'none';
                             }}
                           />
-                          {/* Overlay ringan untuk kontras */}
                           <div className="absolute inset-0 bg-black/20" />
                         </motion.div>
 
@@ -253,16 +251,6 @@ export default function ProjectsSection() {
                           )}
                         </AnimatePresence>
                       </div>
-
-                      {/* Project Badge */}
-                      <motion.div
-                        className={`absolute top-4 right-4 px-3 py-1 rounded-full bg-gradient-to-r ${featuredProjects[currentSlide].color} text-white text-xs font-bold shadow-lg`}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.6 }}
-                      >
-                        Featured
-                      </motion.div>
                     </motion.div>
                   </div>
 

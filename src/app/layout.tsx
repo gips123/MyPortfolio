@@ -13,23 +13,23 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ghifary Ahmad - Full Stack Developer",
-  description: "Full Stack Developer & UI/UX Designer. I create beautiful and functional web applications with modern technologies.",
-  keywords: "Ghifary Ahmad, Full Stack Developer, React, Next.js, TypeScript, Node.js, Web Developer, Portfolio",
+  title: "Ghifary Ahmad - Front End Developer",
+  description: "Front End Developer & UI/UX Designer. I create beautiful and functional web applications with modern technologies.",
+  keywords: "Ghifary Ahmad, Front End Developer, React, Next.js, TypeScript, Node.js, Web Developer, Portfolio",
   authors: [{ name: "Ghifary Ahmad" }],
   creator: "Ghifary Ahmad",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://yourportfolio.com",
-    title: "Ghifary Ahmad - Full Stack Developer",
-    description: "Full Stack Developer & UI/UX Designer. Creating beautiful and functional web applications.",
+    title: "Ghifary Ahmad - Front End Developer",
+    description: "Front End Developer & UI/UX Designer. Creating beautiful and functional web applications.",
     siteName: "Ghifary Ahmad Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ghifary Ahmad - Full Stack Developer",
-    description: "Full Stack Developer & UI/UX Designer. Creating beautiful and functional web applications.",
+    title: "Ghifary Ahmad - Front End Developer",
+    description: "Front End Developer & UI/UX Designer. Creating beautiful and functional web applications.",
     creator: "@yourusername",
   },
 };

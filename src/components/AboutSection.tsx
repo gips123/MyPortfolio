@@ -46,21 +46,21 @@ export default function AboutSection() {
       description: 'Building responsive, performant web applications with React, Next.js, and modern CSS frameworks.',
       skills: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
       color: 'from-blue-500 to-cyan-500',
-      percentage: 95,
+      percentage: 88,
     },
     {
       title: 'Backend Engineering',
       description: 'Developing scalable server-side applications and APIs with Node.js ecosystem.',
       skills: ['Node.js', 'Express.js', 'MongoDB', 'MySQL', 'Strapi'],
       color: 'from-green-500 to-emerald-500',
-      percentage: 88,
+      percentage: 70,
     },
     {
       title: 'Design Systems',
       description: 'Creating cohesive design languages and user experiences that delight users.',
       skills: ['Figma', 'Canva', 'UI/UX', 'Prototyping'],
       color: 'from-purple-500 to-pink-500',
-      percentage: 90,
+      percentage: 88,
     },
   ];
 

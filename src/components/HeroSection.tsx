@@ -228,7 +228,7 @@ export default function HeroSection() {
               transition={{ duration: 1, delay: 2 }}
             >
               <span className="font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                Full Stack Developer
+                Front End Developer
               </span>{' '}
               passionate about creating{' '}
               <span className="font-semibold text-white">beautiful</span> and{' '}

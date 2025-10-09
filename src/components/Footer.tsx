@@ -185,7 +185,7 @@ export default function Footer() {
               </span>
             </h3>
             <p className="text-gray-400 text-sm mb-4 leading-relaxed">
-              Full Stack Developer & UI/UX Designer creating exceptional digital experiences.
+              Front End Developer & UI/UX Designer creating exceptional digital experiences.
             </p>
             <div className="flex items-center gap-2 text-xs text-gray-500">
               <span>Made with</span>
@@ -270,7 +270,7 @@ export default function Footer() {
             <div className="flex gap-6 text-xs text-gray-500">
               <span>Jakarta, Indonesia</span>
               <span>•</span>
-              <span>Full Stack Developer</span>
+              <span>Front End Developer</span>
             </div>
           </div>
         </motion.div>

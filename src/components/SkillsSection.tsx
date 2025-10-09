@@ -62,9 +62,9 @@ const skillDomains = [
     bgGradient: 'bg-gradient-to-br from-blue-500/10 to-cyan-500/10',
     level: 'Expert',
     skills: [
-      { name: 'React/Next.js', level: 95, category: 'Framework', icon: Atom },
-      { name: 'TypeScript', level: 90, category: 'Language', icon: FileCode },
-      { name: 'Tailwind CSS', level: 95, category: 'Styling', icon: Paintbrush },
+      { name: 'React/Next.js', level: 90, category: 'Framework', icon: Atom },
+      { name: 'TypeScript', level: 88, category: 'Language', icon: FileCode },
+      { name: 'Tailwind CSS', level: 90, category: 'Styling', icon: Paintbrush },
       { name: 'Framer Motion', level: 80, category: 'Animation', icon: Layers },
     ]
   },
@@ -77,10 +77,10 @@ const skillDomains = [
     bgGradient: 'bg-gradient-to-br from-green-500/10 to-emerald-500/10',
     level: 'Advanced',
     skills: [
-      { name: 'Node.js', level: 88, category: 'Runtime', experience: '2+ years', icon: Terminal },
-      { name: 'Express.js', level: 85, category: 'Framework', experience: '2+ years', icon: Zap },
-      { name: 'MySQL', level: 80, category: 'Database', experience: '1+ years', icon: Database },
-      { name: 'MongoDB', level: 82, category: 'Database', experience: '1+ years', icon: Database },
+      { name: 'Node.js', level: 80, category: 'Runtime', experience: '', icon: Terminal },
+      { name: 'Express.js', level: 80, category: 'Framework', experience: '', icon: Zap },
+      { name: 'MySQL', level: 88, category: 'Database', experience: '', icon: Database },
+      { name: 'MongoDB', level: 70, category: 'Database', experience: '', icon: Database },
     ]
   },
   {
@@ -92,10 +92,10 @@ const skillDomains = [
     bgGradient: 'bg-gradient-to-br from-indigo-500/10 to-purple-500/10',
     level: 'Advanced',
     skills: [
-      { name: 'Figma', level: 85, category: 'Design Tool', experience: '2+ years', icon: Box },
-      { name: 'Canva', level: 95, category: 'Design Tool', experience: '1+ years', icon: Layers },
-      { name: 'Prototyping', level: 85, category: 'Skill', experience: '2+ years', icon: Settings },
-      { name: 'User Research', level: 80, category: 'Skill', experience: '1+ years', icon: Star },
+      { name: 'Figma', level: 80, category: 'Design Tool', experience: '', icon: Box },
+      { name: 'Canva', level: 95, category: 'Design Tool', experience: '', icon: Layers },
+      { name: 'Prototyping', level: 80, category: 'Skill', experience: '', icon: Settings },
+      { name: 'User Research', level: 88, category: 'Skill', experience: '', icon: Star },
     ]
   }
 ];
