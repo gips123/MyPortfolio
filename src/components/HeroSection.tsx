@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Download, ExternalLink, Github, Linkedin, Mail, ChevronDown } from 'lucide-react';
+import { Download, ExternalLink, Github, Linkedin, Mail } from 'lucide-react';
 import Image from 'next/image';
 
 export default function HeroSection() {
@@ -181,7 +181,7 @@ export default function HeroSection() {
               transition={{ duration: 1, delay: 1 }}
             >
               <span className="bg-gradient-to-r from-white via-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                Hi, I'm{' '}
+                Hi, I&apos;m{' '}
               </span>
               <br />
               <motion.span
@@ -289,10 +289,10 @@ export default function HeroSection() {
               className="flex gap-6"
             >
               {[
-                { icon: Github, href: '#', label: 'GitHub', color: 'from-gray-600 to-gray-800' },
-                { icon: Linkedin, href: '#', label: 'LinkedIn', color: 'from-blue-600 to-blue-800' },
-                { icon: Mail, href: '#', label: 'Email', color: 'from-green-600 to-green-800' },
-              ].map(({ icon: Icon, href, label, color }, index) => (
+                { icon: Github, href: '#', label: 'GitHub' },
+                { icon: Linkedin, href: '#', label: 'LinkedIn' },
+                { icon: Mail, href: '#', label: 'Email' },
+              ].map(({ icon: Icon, href, label }, index) => (
                 <motion.a
                   key={label}
                   href={href}

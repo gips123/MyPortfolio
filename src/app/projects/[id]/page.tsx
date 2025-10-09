@@ -1,11 +1,11 @@
 'use client';
 
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ExternalLink, Github, Calendar, User, Tag, Play, Pause, ZoomIn, X } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Github, Calendar, User, Tag, Play, ZoomIn, X } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
-import { getProjectById, type ProjectDetail, type ProjectImage, type ProjectVideo } from '@/data/projects';
+import { getProjectById, type ProjectImage } from '@/data/projects';
 
 export default function ProjectDetailPage() {
   const params = useParams();
@@ -21,6 +21,7 @@ export default function ProjectDetailPage() {
   });
 
   const y = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, 100]);
 
   const project = getProjectById(Number(params.id));
 
@@ -59,7 +60,7 @@ export default function ProjectDetailPage() {
             className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"
           />
           <motion.div
-            style={{ y: useTransform(scrollYProgress, [0, 1], [0, 100]) }}
+            style={{ y: y2 }}
             className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl"
           />
         </div>
@@ -169,7 +170,7 @@ export default function ProjectDetailPage() {
               ].map((tab) => (
                 <button
                   key={tab.id}
-                  onClick={() => setActiveTab(tab.id as any)}
+                  onClick={() => setActiveTab(tab.id as 'overview' | 'gallery' | 'videos')}
                   className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
                     activeTab === tab.id
                       ? 'bg-cyan-500 text-white shadow-lg'

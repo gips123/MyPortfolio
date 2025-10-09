@@ -162,7 +162,7 @@ export default function ContactSection() {
           </motion.div>
           <h2 className="text-4xl md:text-6xl font-black mb-6">
             <span className="bg-gradient-to-r from-white via-cyan-200 to-blue-200 bg-clip-text text-transparent">
-              Let's Connect
+              Let&apos;s Connect
             </span>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
@@ -281,7 +281,7 @@ export default function ContactSection() {
           className="text-center mt-16"
         >
           <p className="text-lg text-gray-400 mb-6">
-            Have a project in mind? Let's discuss how we can work together.
+            Have a project in mind? Let&apos;s discuss how we can work together.
           </p>
           <motion.a
             href="mailto:ghifary.ahmad@example.com"

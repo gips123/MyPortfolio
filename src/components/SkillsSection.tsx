@@ -3,17 +3,16 @@
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { 
-  Code2, Database, Palette, Zap, Star, Cpu, 
-  Monitor, Server, Smartphone, Cloud, 
+  Code2, Database, Palette, Zap, Star, 
+  Monitor, Server, Cloud, 
   Layers, Globe, Box, GitBranch,
-  Chrome, Terminal, Wrench, FileCode, Paintbrush,
+  Terminal, FileCode, Paintbrush,
   Triangle, Settings, Atom, Braces
 } from 'lucide-react';
 
 export default function SkillsSection() {
   const [isVisible, setIsVisible] = useState(false);
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -40,15 +39,6 @@ export default function SkillsSection() {
     }
 
     return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   // Enhanced skill categories with more detailed information
@@ -99,32 +89,6 @@ const skillDomains = [
     ]
   }
 ];
-
-const allTechnologies = [
-  { name: 'React', icon: Atom, color: 'from-blue-400 to-blue-600', gradient: 'from-blue-400 to-blue-600' },
-  { name: 'Next.js', icon: Triangle, color: 'from-gray-600 to-gray-800' },
-  { name: 'TypeScript', icon: FileCode, color: 'from-blue-500 to-blue-700' },
-  { name: 'JavaScript', icon: Braces, color: 'from-yellow-400 to-yellow-600' },
-  { name: 'Node.js', icon: Terminal, color: 'from-green-500 to-green-700' },
-  { name: 'Python', icon: Code2, color: 'from-green-400 to-blue-500' },
-  { name: 'Tailwind', icon: Paintbrush, color: 'from-cyan-400 to-cyan-600' },
-  { name: 'MongoDB', icon: Database, color: 'from-green-500 to-green-700' },
-  { name: 'PostgreSQL', icon: Database, color: 'from-blue-500 to-indigo-600' },
-  { name: 'Docker', icon: Box, color: 'from-blue-400 to-blue-600' },
-  { name: 'AWS', icon: Cloud, color: 'from-orange-400 to-orange-600' },
-  { name: 'Git', icon: GitBranch, color: 'from-orange-500 to-red-600' },
-  { name: 'Figma', icon: Box, color: 'from-purple-400 to-pink-500' },
-  { name: 'Firebase', icon: Zap, color: 'from-yellow-500 to-orange-600' },
-  { name: 'GraphQL', icon: Globe, color: 'from-pink-500 to-rose-600' },
-  { name: 'Redux', icon: Layers, color: 'from-purple-500 to-purple-700' },
-  { name: 'Vue.js', icon: Triangle, color: 'from-green-400 to-green-600' },
-  { name: 'Sass', icon: Paintbrush, color: 'from-pink-400 to-pink-600' }
-];  // Popular technologies cloud
-  const techCloud = [
-    'React', 'Next.js', 'TypeScript', 'Node.js', 'MongoDB', 'PostgreSQL',
-    'Tailwind CSS', 'Framer Motion', 'Express.js', 'GraphQL', 'Docker', 'AWS',
-    'Figma', 'Git', 'Prisma', 'Redux', 'Jest', 'Cypress', 'Vercel', 'Supabase'
-  ];
 
   return (
     <section

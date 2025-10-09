@@ -3,7 +3,8 @@
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
 import { ExternalLink, Github, Sparkles, Star, Eye, ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { getFeaturedProjects, type ProjectDetail } from '@/data/projects';
+import { getFeaturedProjects } from '@/data/projects';
+import Image from 'next/image';
 
 export default function ProjectsSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -21,7 +22,6 @@ export default function ProjectsSection() {
   const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
   const y1 = useSpring(useTransform(scrollYProgress, [0, 1], [0, -100]), springConfig);
   const y2 = useSpring(useTransform(scrollYProgress, [0, 1], [0, 100]), springConfig);
-  const rotate = useSpring(useTransform(scrollYProgress, [0, 1], [0, 360]), springConfig);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -208,11 +208,12 @@ export default function ProjectsSection() {
                           transition={{ duration: 1.2 }}
                           className="absolute inset-0"
                         >
-                          <img
+                          <Image
                             src={featuredProjects[currentSlide].image}
                             alt={featuredProjects[currentSlide].title}
-                            className="w-full h-full object-cover"
-                            onError={(e) => {
+                            fill
+                            className="object-cover"
+                            onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
                               e.currentTarget.style.display = 'none';
                             }}
                           />

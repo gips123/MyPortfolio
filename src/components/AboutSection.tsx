@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Code, Palette, Zap, Heart, Coffee, Sparkles, Award, Target, Users, Lightbulb } from 'lucide-react';
+import { Code, Heart, Coffee, Sparkles } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 export default function AboutSection() {
@@ -32,13 +32,6 @@ export default function AboutSection() {
 
     return () => observer.disconnect();
   }, []);
-
-  const achievements = [
-    { number: '50+', label: 'Projects Completed', icon: Award },
-    { number: '3+', label: 'Years Experience', icon: Target },
-    { number: '20+', label: 'Happy Clients', icon: Users },
-    { number: '100+', label: 'Creative Solutions', icon: Lightbulb },
-  ];
 
   const expertise = [
     {
@@ -214,7 +207,7 @@ export default function AboutSection() {
                         transition={{ duration: 0.6, delay: 1.1 }}
                       >
                         Every line of code is crafted with intention, every pixel placed with purpose. 
-                        I don't just build applications—I create digital experiences that leave lasting impressions.
+                        I don&apos;t just build applications—I create digital experiences that leave lasting impressions.
                       </motion.p>
                     </div>
                   </motion.div>

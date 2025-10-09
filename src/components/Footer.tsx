@@ -2,8 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { 
-  Heart, Coffee, Code, ArrowUp, Mail, Github, Linkedin, Twitter, 
-  Sparkles, Zap, Rocket, Star, MapPin, Calendar, Send, ExternalLink
+  Heart, Code, ArrowUp, Mail, Github, Linkedin, Twitter, 
+  Zap, Rocket, Star, Send
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
@@ -74,14 +74,7 @@ export default function Footer() {
     },
   ];
 
-  const techStack = [
-    { name: 'Next.js', color: 'from-gray-400 to-gray-600' },
-    { name: 'React', color: 'from-blue-400 to-cyan-400' },
-    { name: 'TypeScript', color: 'from-blue-600 to-blue-800' },
-    { name: 'Tailwind CSS', color: 'from-cyan-400 to-blue-500' },
-    { name: 'Framer Motion', color: 'from-purple-400 to-pink-500' },
-    { name: 'Node.js', color: 'from-green-400 to-green-600' },
-  ];
+  const getCurrentYear = () => new Date().getFullYear();
 
   return (
     <footer className="relative bg-gradient-to-br from-black via-gray-900 to-black text-white overflow-hidden">
@@ -208,7 +201,7 @@ export default function Footer() {
           >
             <h4 className="text-white font-semibold mb-4">Navigation</h4>
             <div className="space-y-2">
-              {quickLinks.map((link, index) => (
+              {quickLinks.map((link) => (
                 <motion.a
                   key={link.name}
                   href={link.href}
@@ -230,7 +223,7 @@ export default function Footer() {
           >
             <h4 className="text-white font-semibold mb-4">Connect</h4>
             <div className="flex gap-4 mb-4">
-              {socialLinks.map((social, index) => (
+              {socialLinks.map((social) => (
                 <motion.a
                   key={social.name}
                   href={social.href}
