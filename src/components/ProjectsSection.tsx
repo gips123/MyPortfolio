@@ -1,10 +1,11 @@
 'use client';
 
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Github, Sparkles, Star, Eye, ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
+import { ExternalLink, Github, Sparkles, Star, Eye, ChevronLeft, ChevronRight, Pause, Play, Palette, ArrowRight } from 'lucide-react';
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { getFeaturedProjects } from '@/data/projects';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function ProjectsSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -393,6 +394,34 @@ export default function ProjectsSection() {
           </motion.div>
         </div>
 
+        {/* Graphic Design Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="text-center mt-16"
+        >
+          <Link href="/graphic-design">
+            <motion.div
+              whileHover={{ scale: 1.05, y: -5 }}
+              whileTap={{ scale: 0.95 }}
+              className="group inline-flex items-center gap-4 px-8 py-4 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white font-bold rounded-2xl hover:shadow-2xl transition-all duration-300 relative overflow-hidden"
+            >
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              >
+                <Palette className="w-6 h-6" />
+              </motion.div>
+              <span>View Graphic Design Portfolio</span>
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+              <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+            </motion.div>
+          </Link>
+          <p className="text-white/60 mt-4 text-sm">
+            Explore my creative designs, branding, and visual art
+          </p>
+        </motion.div>
         
       </div>
     </section>
